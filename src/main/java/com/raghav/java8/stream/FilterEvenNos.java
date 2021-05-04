@@ -9,6 +9,71 @@ import java.util.stream.Collectors;
 
 public class FilterEvenNos {
 
+    static class Apple {
+        String name;
+        int weight;
+        String color;
+        char grade;
+
+        @Override
+        public String toString() {
+            return "Apple{" +
+                    "name='" + name + '\'' +
+                    ", weight=" + weight +
+                    ", color='" + color + '\'' +
+                    ", grade=" + grade +
+                    '}';
+        }
+
+        public Apple(String name, int weight, String color, char grade) {
+            this.name = name;
+            this.weight = weight;
+            this.color = color;
+            this.grade = grade;
+        }
+
+        public Apple(String name, int weight, String color) {
+            this.name = name;
+            this.weight = weight;
+            this.color = color;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public void setWeight(int weight) {
+            this.weight = weight;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public char getGrade() {
+            return grade;
+        }
+
+        public void setGrade(char grade) {
+            this.grade = grade;
+        }
+
+        
+
+    }
+
     public static void main(String[] args) {
         List<Integer> l1 = new ArrayList<>();
 
@@ -49,7 +114,26 @@ public class FilterEvenNos {
         l1.stream().forEach(i-> System.out.println(i));
 
 
+        appleCheck();
 
+
+
+    }
+    
+    public static void appleCheck(){
+        
+        List<Apple> apple = new ArrayList<>();
+        apple.add(new Apple("Fuji",250,"Green"));
+        apple.add(new Apple("Pink",200,"Red"));
+        apple.add(new Apple("Fuji",240,"Red"));
+        apple.add(new Apple("Fuji",250,"Green"));
+        apple.add(new Apple("Fuji", 150, "Green"));
+
+        List<Apple> collect = apple.stream().filter(a -> a.weight >= 200)
+                .filter(a -> (a.color).equals("Green")).collect(Collectors.toList())
+                .stream().map(v -> new Apple(v.getName(),v.getWeight(),v.getColor(),'A')).collect(Collectors.toList());
+
+       System.out.println(collect);
     }
 
 }
